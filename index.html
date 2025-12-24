@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Key Master - 安全、免费的在线密码生成器">
+    <meta name="theme-color" content="#8b5cf6">
+    <title>Key Master - 密码生成器</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">🔑 Key Master</h1>
+            <p class="subtitle">安全、免费的密码生成器</p>
+            <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Password Display -->
+        <section class="password-section">
+            <div class="password-display" id="passwordDisplay">
+                <span class="password-text" id="passwordText">点击生成密码</span>
+            </div>
+            <div class="password-actions">
+                <button class="btn btn-primary" id="generateBtn" aria-label="生成密码">
+                    <span>🔄</span> 生成密码
+                </button>
+                <button class="btn btn-secondary" id="copyBtn" aria-label="复制密码" disabled>
+                    <span>📋</span> 复制
+                </button>
+            </div>
+        </section>
+
+        <!-- Settings -->
+        <section class="settings-section">
+            <!-- Password Length -->
+            <div class="setting-group">
+                <label for="lengthSlider" class="setting-label">
+                    密码长度: <span id="lengthValue">16</span> 位
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="lengthSlider" min="8" max="128" value="16" class="slider">
+                    <div class="slider-labels">
+                        <span>8</span>
+                        <span>128</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Types -->
+            <div class="setting-group">
+                <label class="setting-label">字符类型</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span>大写字母 (A-Z)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span>小写字母 (a-z)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="numbers" checked>
+                        <span>数字 (0-9)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="symbols" checked>
+                        <span>特殊字符 (!@#$%...)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Advanced Options -->
+            <div class="setting-group">
+                <label class="setting-label">高级选项</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="excludeSimilar">
+                        <span>排除相似字符 (0/O, 1/l/I)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="excludeAmbiguous">
+                        <span>排除歧义字符</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Password Presets -->
+            <div class="setting-group">
+                <label class="setting-label">快速预设</label>
+                <div class="preset-buttons">
+                    <button class="btn btn-preset" data-preset="strong">强密码</button>
+                    <button class="btn btn-preset" data-preset="medium">中等密码</button>
+                    <button class="btn btn-preset" data-preset="pin">PIN码</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Password Strength -->
+        <section class="strength-section">
+            <div class="strength-header">
+                <label class="setting-label">密码强度</label>
+                <span class="strength-level" id="strengthLevel">-</span>
+            </div>
+            <div class="strength-bar-container">
+                <div class="strength-bar" id="strengthBar"></div>
+            </div>
+            <div class="strength-info">
+                <div class="strength-item">
+                    <span>熵值:</span>
+                    <span id="entropyValue">-</span>
+                </div>
+                <div class="strength-item">
+                    <span>破解时间:</span>
+                    <span id="crackTime">-</span>
+                </div>
+            </div>
+            <div class="password-analysis" id="passwordAnalysis"></div>
+        </section>
+
+        <!-- Batch Generation -->
+        <section class="batch-section">
+            <button class="btn btn-outline" id="batchToggle">批量生成</button>
+            <div class="batch-panel" id="batchPanel" style="display: none;">
+                <div class="batch-controls">
+                    <label for="batchCount">生成数量:</label>
+                    <input type="number" id="batchCount" min="1" max="100" value="10" class="batch-input">
+                    <button class="btn btn-primary" id="batchGenerateBtn">生成</button>
+                </div>
+                <div class="batch-results" id="batchResults"></div>
+                <button class="btn btn-outline" id="exportBtn" style="display: none;">导出为文件</button>
+            </div>
+        </section>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
